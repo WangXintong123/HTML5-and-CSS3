@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #search{
+            height:40px;
+        }
+        #but{
+            height:40px;
+            width:100px;
+        }
+        .gray{
+            margin-right: 6px;
+            margin-bottom: 6px;
+            background-color: rgb(212, 209, 209);
+            border:1px solid dimgray;
+            float:left;
+        }
+        #cl{
+            float:left;
+            width:20px;
+            height:20px;
+            color:honeydew;
+            background-color:silver;
+            text-align: center;
+        }
+    </style>
+</head>
+<body onload="load()">
+    <input id="search" type="search" placeholder="请输入想查找的商品" name="search">
+    <input id="but" type="button" value="搜索">
+    <p>最近搜索</p>
+    <div id="big" style="width:200px;float:left">
+        <div id="record"></div>
+    </div>
+    <div id="cl">
+        X
+    </div>
+    <script>
+        var item=[];//value
+        var time=[];//key
+        var search=document.getElementById("search");
+        var but=document.getElementById("but");
+        var record=document.getElementById("record");
+        but.onclick=function(){
+            var t=true;
+            var now=new Date();
+            time.push(now.toLocaleString());
+            item.push(search.value);
+            for(var key in localStorage){
+                if(localStorage.getItem(key)==search.value){
+                    t=false;
+                    break;
+                }
+                else{
+                    continue;
+                }
+            }
+            if(t){
+                localStorage.setItem(time[time.length-1],item[item.length-1]);
+                var newdiv=document.createElement("div");
+                record.insertBefore(newdiv,record.children[0]);
+                newdiv.innerHTML="<div class='gray'>"+item[item.length-1]+"</div>";
+            }
+            //  for(var i in item){
+            //      console.log(item[i],time[i]);
+            //  }
+        }
+        var load=function(){
+             for(var i=0;i<localStorage.length;i++){
+                time[i]=localStorage.key(i);
+                item[i]=localStorage.getItem(time[i]);
+             }
+            for(var i=time.length-1;i>=0;i--){
+                if(localStorage.getItem(time[i])){
+                    var newdiv=document.createElement("div");
+                    record.appendChild(newdiv);
+                    newdiv.innerHTML="<div class='gray'>"+item[i]+"</div>";
+                }
+                
+            }
+        }
+        document.getElementById("cl").onclick=function(){
+            localStorage.clear( );
+            location.reload();
+
+        }
+    </script>
+</body>
+</html>
