@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 300px;
+            height: 200px;
+            line-height: 200px;
+            font-size: 40px;
+            text-align: center;
+            font-weight: bold;
+            position: absolute;
+            color: red;
+        }
+        canvas{
+            position: absolute;
+            z-index:2;
+        }
+    </style>
+</head>
+<body>
+    <canvas id='canvas' width='300' height='200' style="border: 1px solid #504b02;"></canvas>
+    <div>中奖了(*^▽^*)</div>
+<script>
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    context.beginPath();
+    context.fillStyle='gray';
+    context.fillRect(0,0,300,200);
+    context.closePath();
+    function draw(x,y){
+        context.beginPath();
+        context.globalCompositeOperation = 'destination-out';
+        context.arc(x-canvas.offsetLeft,y-canvas.offsetTop,20,0,2*Math.PI);
+        context.closePath();
+        context.fillStyle='white';
+        context.fill();
+        ifcomplete();
+    }
+    function ifcomplete(){
+        var imgdata=context.getImageData(0,0,300,200);
+        var data=imgdata.data;
+        var sum=0;
+        for(var i=0;i<data.length;i+=4){
+            var a=data[i+3];
+            if(a<10){
+                sum++
+            }
+        }
+        var x=sum/(data.length/4);
+        if(x>0.85){
+            context.clearRect(0,0,300,200); 
+        }
+    }
+    canvas.addEventListener('mousedown',mousemovedraw);
+    canvas.addEventListener('click',mousedraw);
+    canvas.addEventListener('mouseup',clear);
+    canvas.addEventListener('mouseleave',clear);
+    function clear(e){
+        e.preventDefault();
+        e.target.removeEventListener('mousemove',mousedraw);
+    }
+    function mousemovedraw(e){
+        e.preventDefault();
+        e.target.addEventListener('mousemove',mousedraw);
+    }
+    function mousedraw(e){
+        e.preventDefault();
+        draw(e.pageX,e.pageY);
+    }
+</script>
+</body>
+</html>
