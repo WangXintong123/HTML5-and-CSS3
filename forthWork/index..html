@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #container{
+            position:relative;
+            width:450px;
+            height:550px;
+            border:3px solid rgb(219, 219, 219);
+            background:url(img/qiao.jpg) no-repeat ;
+            background-size: 450px 300px;
+            background-position: 50% 0%;
+            background-origin: content-box;
+            background-clip: border-box;
+            overflow: hidden;
+        }
+        #cover{
+            width:450px;
+            height:300px;
+            background-color: rgba(0, 0, 0, 0);
+            z-index:50;
+        }
+        #over{
+            z-index:60;
+        }
+        #around{
+            /* position:absolute; */
+            width:60px;
+            height:53px;
+            border-radius: 100% 100%;
+            font-weight: bolder;
+            color:white;
+            background: rgb(255, 127, 76);
+            text-align: center;
+            float:right;
+            margin-top: 20px;
+            margin-right: 20px;
+            padding-top: 7px;
+        }
+        #around div{
+            line-height: 0px;
+            text-align: center;  
+        }
+        #txt{
+            width:450px;
+            height:250px;
+            float:left;
+            margin-top: 180px;
+            /* background-color: brown; */
+        }
+        #key{
+            width:65px;
+            height:25px;
+            float:left;
+            background: rgb(255, 127, 76);
+            text-align: center;
+            color:white;
+            line-height: 25px;
+            font-size: 14px;
+        }
+        #detail{
+            width:450px;
+            height:325px;
+            background-color:white;
+            float:left;
+        }
+        #detail h1{
+            font-size:25px;
+            margin-left: 20px;
+            margin-top: 30px;
+        }
+        #detail h2{
+            font-size:20px;
+            color: rgb(255, 127, 76);
+            font-weight: inherit;
+            margin-left: 20px;
+        }
+        #detail p{
+            opacity:0;
+            font-size: 17px;
+            color: gray;
+            width:410px;
+            margin-left: 20px;
+            /* display:none; */
+        }
+        #bottom{
+            position: absolute;
+            bottom:0px;
+            width:450px;
+            height:40px;
+            margin-bottom: 0px;
+            background-color: white;
+            float:left;
+
+        }
+        #bottom span{
+            font-size: 14px;
+            color:rgb(145, 145, 145);
+            margin-left: 20px;
+        }
+        #container:hover{
+            width:450px;
+            height:550px;
+            background-color: black;
+            border:3px solid rgb(219, 219, 219);
+            background:url(img/qiao.jpg) no-repeat ;
+            background-size: 600px 400px;
+            background-position: 50% -35%;
+            /* background-origin: content-box;
+            background-clip: border-box; */
+            box-shadow:0px 0px 6px rgb(117, 117, 117);
+            transition-property:all;
+            transition-duration: 1.5s;
+        }
+        #container:hover #cover{
+            width:450px;
+            height:300px;
+            background-color: rgb(0, 0, 0,0.3);
+            z-index:50;
+        }
+        #container:hover #txt{
+            transform:translateY(-120px);
+            transition-property: transform;
+            transition-duration: 1.5s;
+
+        }
+        #container:hover #detail p{
+            opacity: 1;
+            font-size: 17px;
+            color: gray;
+            width:410px;
+            margin-left: 20px;
+            /* display:block; */
+            transition-property:opacity;
+            transition-duration: 1.5s;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="over">
+                <div id="around">
+                    <div>
+                        <p>15</p><p>五月</p>
+                    </div>
+                </div>
+                <div id="txt">
+                    <div id="key">照片</div>
+                    <div id="detail">
+                        <h1>青岛栈桥</h1>
+                        <h2>国家AAAA级旅游景区</h2>
+                        <p>青岛栈桥是青岛海滨风景区的景点之一，
+                             是国务院于1982年首批公布的国家级风景名胜区，也是首批国家AAAA级旅游景区 。
+                             青岛栈桥位于游人如织的青岛中山路南端，桥身从海岸探入如弯月般的青岛湾深处。
+                             桥身供游人参观并在此停靠旅游船，由此乘船可看海上青岛。</p>
+                    </div>
+                </div>
+                <div id="bottom">
+                    <span>10分钟前</span><span>123评论</span>
+                </div>
+        </div>
+        <div id="cover"></div>
+        
+    </div>
+</body>
+</html>
